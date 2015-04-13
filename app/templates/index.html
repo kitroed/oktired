@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}OK Tired{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Previous screen name search: {% if username %}{{ username }}{% else %}[None]{% endif %}.</h1>
+    {% if not known %}
+    <p>Player screen name not found.</p>
+    {% else %}
+    <p>You have confirmed a screen name that exists, UUID is: {{player_id}}.</p>
+    {% endif %}
+</div>
+{{ wtf.quick_form(form) }}
+{% endblock %}
