@@ -1,4 +1,5 @@
 from flask import render_template, session, redirect, url_for, current_app
+from sqlalchemy import func
 from .. import db
 from ..models import Player
 from . import main
@@ -9,7 +10,8 @@ from .forms import NameForm
 def index():
     form = NameForm()
     if form.validate_on_submit():
-        player = Player.query.filter_by(username=form.username.data).first()
+        player = Player.query.filter(func.lower(Player.username)
+                == func.lower(form.username.data)).first()
         if player is None:
             session['known'] = False
         else:
