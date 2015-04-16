@@ -9,7 +9,7 @@ class Player(db.Model):
     __tablename__ = 'players'
     # intending to use the uuid from minecraft as the player id (stored as a 36 character string)
     id = db.Column(db.String(36), primary_key=True)
-    username = db.Column(db.String(64), index=True)
+    username = db.Column(db.String(64), unique=True)
     statssnapshots = db.relationship('StatsSnapshot', backref='players', lazy='dynamic')
 
     def to_json(self):
@@ -19,6 +19,7 @@ class Player(db.Model):
             'username': self.username,
             'statssnapshot_count': self.statssnapshots.count()
         }
+        #__table_args__ = (Uniqueconstraint('username', unique=True))
         return json_player
 
     def __repr__(self):
