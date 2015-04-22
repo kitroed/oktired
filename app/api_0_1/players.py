@@ -18,3 +18,8 @@ def get_player_statssnapshots(id):
     player_statssnapshots = player.statssnapshots.order_by(StatsSnapshot.timestamp.desc())
     return jsonify({'statssnapshots': [player_statssnapshot.to_json() for player_statssnapshot in player_statssnapshots] })
 
+@api.route('/players/<string:id>/statssnapshots/latest')
+def get_player_statssnapshots_latest(id):
+    player = Player.query.get_or_404(id)
+    latest_statssnapshot = player.statssnapshots.order_by(StatsSnapshot.timestamp.desc()).first()
+    return jsonify(latest_statssnapshot.to_json())
