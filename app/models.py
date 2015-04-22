@@ -218,7 +218,7 @@ class Player(db.Model):
         return json_player
 
     def __repr__(self):
-        return '<Player %r>' % self.username
+        return '<Player {0}>'.format(self.username)
 
 class StatsSnapshot(db.Model):
     __tablename__ = 'statssnapshots'
@@ -239,4 +239,4 @@ class StatsSnapshot(db.Model):
         return json_statssnapshot
 
     def __repr__(self):
-        return '<Stats Snapshot %n>' % self.id
+        return '<Stats Snapshot {0}>'.format(self.id)
