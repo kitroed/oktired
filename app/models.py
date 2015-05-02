@@ -200,6 +200,16 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
+class WorldSnapshot(db.Model):
+    __tablename__ = 'worldsnapshots'
+    id = db.Column(db.Integer, primary_key=True)
+    timestamp = db.Column(db.DateTime, unique=True, index=True)
+    map_thumbnail_url = db.Column(db.Text)
+    map_image_url = db.Column(db.Text)
+
+    def __repr__(self):
+        return '<World Snapshot {0}>'.format(self.id)
+
 
 class Player(db.Model):
     __tablename__ = 'players'
@@ -219,6 +229,7 @@ class Player(db.Model):
 
     def __repr__(self):
         return '<Player {0}>'.format(self.username)
+
 
 class StatsSnapshot(db.Model):
     __tablename__ = 'statssnapshots'
